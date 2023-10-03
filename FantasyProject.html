@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PantaSite</title>
+    <style>
+        /* Center the container div */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('fantasybg.jpg');
+            background-size: cover;
+        }
+
+        /* Style for the button */
+        .button-container {
+            text-align: center;
+        }
+
+        button {
+            background-color: violet; /* Updated button background color */
+            color: white;
+            border: none; /* Removed border to emphasize the 3D effect */
+            padding: 20px 50px;
+            text-align: center;
+            /* Removed text-decoration: blink; as it's not a valid CSS property */
+            display: inline-block;
+            font-size: 30px;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3); /* Added box-shadow for the 3D effect */
+            transition: transform 0.2s ease; /* Smooth button transformation on hover */
+        }
+
+        button:hover {
+            transform: translateY(6px); /* Add a subtle lift effect on hover */
+        }
+    </style>
+</head>
+<body>
+    <!-- Container div to center the button -->
+    <div class="button-container">
+        <!-- Adding a button with styling -->
+        <button onClick="redirectToViewTeams()">VIEW TEAMS</button>
+        <button onClick="redirectToCalcu()">FANTASY CALCULATOR</button>
+        <button onClick="redirectToViewRecord()">VIEW RECORD</button>
+    </div>
+
+    <script>
+     function redirectToCalcu() {
+        window.location.href = 'FantasyCalcu.html';
+    }
+
+     function redirectToViewTeams() {
+        window.location.href = 'ViewNBAteams.html';
+     }
+
+     function redirectToViewRecord() {
+        window.location.href = 'InfoFantasy.html';
+     }
+    </script>
+</body>
+</html>

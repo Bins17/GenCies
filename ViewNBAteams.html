@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pantasi Pros</title>
+    <style>
+        /* Add CSS styles for the message boxes */
+        .message-box {
+            position: absolute;
+            bottom: 10px;
+            width: 30%;
+            background-color: #f0f0f0;
+            padding: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+
+        #msgGamesDisplay {
+            right: 40%;
+        }
+
+        #msgLink {
+            right: 10px;
+        }
+
+        #totalPrice, #requiredPrice, #budgetLeft {
+            font-family: 'Roboto Slab', sans-serif;
+            font-weight: bold;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .blink {
+            animation: blink 1s infinite;
+        }
+        
+        /* Add styles for the selected players container */
+    .selected-players-container {
+    border: 2px solid #007BFF;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #f7f7f7;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    max-width: 300px;
+ }
+
+    .selected-players-container h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    
+}
+
+   .selected-players-container ul {
+    list-style: none;
+    padding: 0;
+}
+
+  .selected-players-container li {
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between; /* Align elements with space in between */
+    align-items: center;
+}
+
+   .selected-players-container span {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+body {
+    background-color: #333;
+    color: #fff;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.8); /* Glowing black border for text */
+}
+
+/* Add a glowing black border on hover */
+body a, body button {
+    text-decoration: none; /* Remove underline from links */
+    color: #fff; /* Default text color */
+    transition: color 0.3s, text-shadow 0.3s; /* Add smooth transition */
+}
+
+body a:hover, body button:hover {
+    text-shadow: 0 0 10px rgba(0, 0, 0, 1); /* Increase the intensity of the glowing border */
+    color: #00bfff; /* Change text color on hover (e.g., to a bright blue) */
+}
+  
+/* Circular design for position label */
+.position-circle {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-color: transparent; /* Make the background transparent */
+    border: 2px solid #007BFF; /* Add a blue border */
+    color: #fff;
+    text-align: center;
+    line-height: 24px;
+    border-radius: 50%;
+    margin-right: 5px;
+    font-weight: bold;
+    font-size: 12px; /* Adjust the font size */
+}
+
+
+
+
+/* Modify the styles for the "Your Lineup" header */
+.selected-players-container h2 {
+    background-color: #000; /* Set the background color to black */
+    color: #fff; /* Set the text color to white for contrast */
+    padding: 10px; /* Add some padding for spacing */
+    text-align: center; /* Center the text horizontally */
+    position: relative; /* Position relative for pseudo-element */
+}
+
+.selected-players-container h2::before {
+    content: ""; /* Add a pseudo-element for the glowing border */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid #00bfff; /* Set the border color to a bright blue */
+    border-radius: 5px; /* Add rounded corners */
+    opacity: 0; /* Initially make it transparent */
+    animation: glow 2s infinite; /* Apply the glowing animation */
+}
+
+@keyframes glow {
+    0% {
+        opacity: 0.2; /* Initial opacity */
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Add a subtle box-shadow */
+    }
+    50% {
+        opacity: 0.8; /* Maximum opacity */
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.8); /* Increase the box-shadow */
+    }
+    100% {
+        opacity: 0.2; /* Back to initial opacity */
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Back to initial box-shadow */
+    }
+}
+
+/* Add line separators between displays */
+.message-box,
+.selected-players-container {
+    background-color: #111; /* Dark gray background for displays */
+    border: 1px solid #444; /* Add a border for separation */
+    border-radius: 5px; /* Add rounded corners */
+    margin: 20px 0; /* Add margin for spacing between displays */
+    padding: 10px; /* Add padding for content spacing */
+}
+
+.selected-players-container button {
+    color: #000; /* Set text color to black for remove buttons */
+}
+
+/* Modify the button styles to make them appear 3D */
+body button {
+    text-decoration: none;
+    color: #fff; /* Default text color */
+    background-color: #007BFF; /* Button background color */
+    border: 1px solid #0056b3; /* Darker border color */
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s; /* Add smooth transitions */
+
+    /* Add a 3D-like effect with box-shadow */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+body button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    color: #fff; /* White text on hover */
+    transform: translateY(-2px); /* Move the button up slightly on hover for a 3D effect */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Increase the box-shadow on hover for a lift effect */
+}
+
+
+/* Style for the copy button */
+button {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+
+    </style>
+</head>
+
+<body>
+    <div id="selectedPlayersContainer" class="selected-players-container">
+    <h2>Your Lineup</h2>
+    <ul id="selectedPlayersList"></ul>
+   </div>
+
+
+    <div id="msgGamesDisplay" class="message-box">
+        <h2>NBA Games Today 9/1/23</h2>
+        <p>Lakers @ Bulls 8:30am</p>
+        <p>Kings @ Sixers 8:30am</p>
+        <p>Bucks @ Celtics 8:30am</p>
+    </div>
+
+    <div id="msgLink" class="message-box">
+        <h2>Click get Lineup, and submit it here:</h2>
+        <p>https://www.facebook.com/groups/2268460530042250</p>
+    </div>
+
+    <h1>Select Players</h1>
+
+    <label for="pgSelect">Point Guards:</label>
+    <select id="pgSelect">
+        <option value="" disabled selected>Please select a Point Guard</option>
+        <!-- Add options for Point Guards here -->
+        <option value="Luka Doncic" data-price="84k">Luka Doncic (DAL) - 84k</option>
+        <option value="De'Aaron Fox" data-price="78k">De'Aaron Fox - 78k</option>
+        <option value="Damian Lillard" data-price="78k">Damian Lillard - 78k</option>
+        <option value="Stephen Curry" data-price="68k">Stephen Curry - 68k</option>
+        <option value="D'Angelo Russell" data-price="45k">D'Angelo Russell - 45k</option>
+        <option value="Trae Young" data-price="32k">Trae Young - 32k</option>
+    </select>
+
+    <label for="sgSelect">Shooting Guards:</label>
+    <select id="sgSelect">
+        <option value="" disabled selected>Please select a Shooting Guard</option>
+        <!-- Add options for Shooting Guards here -->
+        <option value="Anthony Edwards" data-price="84k">Anthony Edwards - 84k</option>
+        <option value="Devin Booker" data-price="68k">Devin Booker - 68k</option>
+        <option value="Donovan Mitchell" data-price="78k">Donovan Mitchell - 78k</option>
+        <option value="Jordan Poole" data-price="50k">Jordan Poole - 50k</option>
+        <option value="Austin Reaves" data-price="25k">Austin Reaves - 25k</option>
+        <option value="Zach LaVine" data-price="74k">Zach LaVine - 74k</option>
+        <option value="Klay Thompson" data-price="48k">Klay Thompson - 48k</option>
+        <option value="Josh Hart" data-price="28k">Josh Hart - 28k</option>
+    </select>
+
+     <label for="sfSelect">Small Forwards:</label>
+     <select id="sfSelect">
+    <option value="" disabled selected>Please select a Small Forward</option>
+    <!-- Add options for Small Forwards here -->
+    <option value="LeBron James" data-price="90k">LeBron James - 90k</option>
+    <option value="Kevin Durant" data-price="85k">Kevin Durant - 85k</option>
+    <option value="Jimmy Butler" data-price="78k">Jimmy Butler - 78k</option>
+    <option value="Kawhi Leonard" data-price="70k">Kawhi Leonard - 70k</option>
+    <option value="Jayson Tatum" data-price="65k">Jayson Tatum - 65k</option>
+    <option value="Gordon Hayward" data-price="45k">Gordon Hayward - 45k</option>
+   </select>
+   
+   
+
+    <p>Total Price: <span id="totalPrice">0</span></p>
+    <p>Available Price: <span id="requiredPrice">305k</span></p>
+    <p>Budget Left: <span id="budgetLeft">305</span></p>
+
+    <button onclick="goBack()">Return to Home page</button>
+    <button id="copyButton">Get Lineup</button>
+
+
+    <script>
+        var copyButton = document.getElementById("copyButton");
+
+        var selectedPlayersPG = [];
+        var selectedPlayersSG = [];
+        var selectedPlayersSF = []; 
+        var totalSelectedPrice = 0;
+        var requiredPrice = 305;
+        var budgetLeft = requiredPrice;
+
+        var pgSelect = document.getElementById("pgSelect");
+        var sgSelect = document.getElementById("sgSelect");
+        var sfSelect = document.getElementById("sfSelect");
+        var selectedPlayersList = document.getElementById("selectedPlayersList");
+        var totalPriceElement = document.getElementById("totalPrice");
+        var budgetLeftElement = document.getElementById("budgetLeft");
+
+        pgSelect.addEventListener("change", function() {
+            if (isMaxPlayersSelected()) {
+        alert("You have already selected the maximum number of players (5).");
+        pgSelect.selectedIndex = 0; // Reset the dropdown to its initial state
+        return;
+    }
+            var selectedOption = pgSelect.options[pgSelect.selectedIndex];
+            var pgName = selectedOption.value;
+
+            // Check if the player is already selected
+            if (selectedPlayersPG.includes(pgName)) {
+                // Player is already selected, remove it from the selection
+                removePlayer(pgName, true);
+                return;
+            }
+
+            var playerPrice = parseInt(selectedOption.getAttribute("data-price"));
+
+            // Check if adding the player exceeds the budget
+            if (totalSelectedPrice + playerPrice > requiredPrice) {
+                // Display an alert that the budget would be exceeded
+                alert("Adding this player would exceed the budget.");
+                return;
+            }
+
+            // Handle selection of Point Guard here
+            selectedPlayersPG.push(pgName);
+            totalSelectedPrice += playerPrice;
+            budgetLeft -= playerPrice;
+            totalPriceElement.textContent = totalSelectedPrice + "k";
+            budgetLeftElement.textContent = budgetLeft + "k";
+
+            // Create and add the player to the selected players list
+            addPlayerToSelectedList(pgName, true);
+            disableSelectedPlayersInDropdown(selectedPlayersPG, pgSelect);
+          
+        });
+
+        sgSelect.addEventListener("change", function() {
+            if (isMaxPlayersSelected()) {
+        alert("You have already selected the maximum number of players (5).");
+        sgSelect.selectedIndex = 0; // Reset the dropdown to its initial state
+        return;
+    }
+            var selectedOption = sgSelect.options[sgSelect.selectedIndex];
+            var sgName = selectedOption.value;
+
+            // Check if the player is already selected
+            if (selectedPlayersSG.includes(sgName)) {
+                // Player is already selected, remove it from the selection
+                removePlayer(sgName, false);
+                return;
+            }
+
+            var playerPrice = parseInt(selectedOption.getAttribute("data-price"));
+
+            // Check if adding the player exceeds the budget
+            if (totalSelectedPrice + playerPrice > requiredPrice) {
+                // Display an alert that the budget would be exceeded
+                alert("Adding this player would exceed the budget.");
+                return;
+            }
+
+            // Handle selection of Shooting Guard here
+            selectedPlayersSG.push(sgName);
+            totalSelectedPrice += playerPrice;
+            budgetLeft -= playerPrice;
+            totalPriceElement.textContent = totalSelectedPrice + "k";
+            budgetLeftElement.textContent = budgetLeft + "k";
+
+            // Create and add the player to the selected players list
+            addPlayerToSelectedList(sgName, false);
+            disableSelectedPlayersInDropdown(selectedPlayersSG, sgSelect);
+            
+        });
+
+        function addPlayerToSelectedList(playerName, isPG) {
+            var listItem = document.createElement("li");
+            var positionLabel = document.createElement("span");
+            positionLabel.textContent = isPG ? "PG" : "SG";
+            positionLabel.style.marginRight = "8px";
+            listItem.appendChild(positionLabel);
+
+            var playerNameNode = document.createTextNode(playerName);
+            listItem.appendChild(playerNameNode);
+            listItem.id = "player_" + playerName;
+
+            var removeButton = document.createElement("button");
+            removeButton.textContent = "Remove";
+            removeButton.onclick = function() {
+                removePlayer(playerName, isPG);
+            };
+            listItem.appendChild(removeButton);
+
+            selectedPlayersList.appendChild(listItem);
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+
+        function removePlayer(playerName, isPG) {
+            var playerArray = isPG ? selectedPlayersPG : selectedPlayersSG;
+            var playerIndex = playerArray.indexOf(playerName);
+            if (playerIndex !== -1) {
+                playerArray.splice(playerIndex, 1);
+
+                var listItem = document.getElementById("player_" + playerName);
+                if (listItem) {
+                    selectedPlayersList.removeChild(listItem);
+
+                    var playerOption = isPG ? pgSelect.querySelector(`option[value="${playerName}"]`) :
+                        sgSelect.querySelector(`option[value="${playerName}"]`);
+
+                    if (playerOption) {
+                        playerOption.selected = false;
+                    }
+
+                    totalSelectedPrice -= parseInt(playerOption.getAttribute("data-price"));
+                    budgetLeft += parseInt(playerOption.getAttribute("data-price"));
+                    totalPriceElement.textContent = totalSelectedPrice + "k";
+                    budgetLeftElement.textContent = budgetLeft + "k";
+                }
+            }
+        }
+
+function removePlayer(playerName, isPG, isSF) {
+        var playerArray = isPG ? selectedPlayersPG : isSF ? selectedPlayersSF : selectedPlayersSG;
+        var playerIndex = playerArray.indexOf(playerName);
+        if (playerIndex !== -1) {
+            playerArray.splice(playerIndex, 1);
+
+            var listItem = document.getElementById("player_" + playerName);
+            if (listItem) {
+                selectedPlayersList.removeChild(listItem);
+
+                var playerOption = isPG ? pgSelect.querySelector(`option[value="${playerName}"]`) :
+                    isSF ? sfSelect.querySelector(`option[value="${playerName}"]`) :
+                    sgSelect.querySelector(`option[value="${playerName}"]`);
+
+                if (playerOption) {
+                    playerOption.selected = false;
+                    playerOption.disabled = false; // Re-enable the option
+                }
+
+                totalSelectedPrice -= parseInt(playerOption.getAttribute("data-price"));
+                budgetLeft += parseInt(playerOption.getAttribute("data-price"));
+                totalPriceElement.textContent = totalSelectedPrice + "k";
+                budgetLeftElement.textContent = budgetLeft + "k";
+            }
+        }
+    }
+
+    function addPlayerToSelectedList(playerName, isPG, isSF) {
+    var listItem = document.createElement("li");
+
+    // Create a circular design element for the player's position
+    var positionLabel = document.createElement("div");
+    positionLabel.classList.add("position-circle");
+    positionLabel.textContent = isPG ? "PG" : isSF ? "SF" : "SG"; // Check if it's SF
+
+    var playerNameNode = document.createTextNode(playerName);
+    var playerPrice = document.createElement("span"); // Create a span element for the player's price
+    var playerPriceValue = isPG ? pgSelect.querySelector(`option[value="${playerName}"]`) :
+        isSF ? sfSelect.querySelector(`option[value="${playerName}"]`) :
+        sgSelect.querySelector(`option[value="${playerName}"]`);
+    
+    // Check if the player option exists and has a data-price attribute
+    if (playerPriceValue && playerPriceValue.getAttribute("data-price")) {
+        playerPrice.textContent = playerPriceValue.getAttribute("data-price");
+    }
+
+    listItem.appendChild(positionLabel);
+    listItem.appendChild(playerNameNode);
+    listItem.appendChild(playerPrice); // Append the price element to the list item
+    listItem.id = "player_" + playerName;
+
+    var removeButton = document.createElement("button");
+    removeButton.textContent = "Remove";
+    removeButton.onclick = function () {
+        removePlayer(playerName, isPG, isSF); // Pass isSF to the removePlayer function
+    };
+    listItem.appendChild(removeButton);
+    selectedPlayersList.appendChild(listItem);
+}
+
+
+sfSelect.addEventListener("change", function() {
+    if (isMaxPlayersSelected()) {
+        alert("You have already selected the maximum number of players (5).");
+        sfSelect.selectedIndex = 0; // Reset the dropdown to its initial state
+        return;
+    }
+    var selectedOption = sfSelect.options[sfSelect.selectedIndex];
+    var sfName = selectedOption.value;
+
+    // Check if the player is already selected
+    if (selectedPlayersSF.includes(sfName)) {
+        // Player is already selected, remove it from the selection
+        removePlayer(sfName, false, true); // Pass true for isSF
+        return;
+    }
+
+    var playerPrice = parseInt(selectedOption.getAttribute("data-price"));
+
+    // Check if adding the player exceeds the budget
+    if (totalSelectedPrice + playerPrice > requiredPrice) {
+        // Display an alert that the budget would be exceeded
+        alert("Adding this player would exceed the budget.");
+        return;
+    }
+
+    // Handle selection of Small Forward here
+    selectedPlayersSF.push(sfName);
+    totalSelectedPrice += playerPrice;
+    budgetLeft -= playerPrice;
+    totalPriceElement.textContent = totalSelectedPrice + "k";
+    budgetLeftElement.textContent = budgetLeft + "k";
+
+    // Create and add the player to the selected players list
+    addPlayerToSelectedList(sfName, false, true); // Pass true for isSF
+    disableSelectedPlayersInDropdown(selectedPlayersSF, sfSelect);
+    
+});
+
+
+// Function to disable selected players in the dropdown
+function disableSelectedPlayersInDropdown(selectedPlayers, selectElement) {
+    const options = selectElement.options;
+    for (let i = 0; i < options.length; i++) {
+        const option = options[i];
+        if (selectedPlayers.includes(option.value)) {
+            option.disabled = true;
+        } else {
+            option.disabled = false;
+        }
+    }
+}
+
+function isMaxPlayersSelected() {
+    return selectedPlayersPG.length + selectedPlayersSG.length + selectedPlayersSF.length >= 5;
+}
+// Get the copy button element
+var copyButton = document.getElementById("copyButton");
+
+// Add a click event listener to the copy button
+copyButton.addEventListener("click", function () {
+    // Create a string containing the selected players
+    var selectedPlayersText = "[Type your name here]\n";
+
+    // Loop through the selected players and add them to the string
+    selectedPlayersPG.forEach(function (player) {
+    selectedPlayersText += "PG: " + player + " " + pgSelect.querySelector(`option[value="${player}"]`).getAttribute("data-price") + "\n";
+    });
+
+    selectedPlayersSG.forEach(function (player) {
+        selectedPlayersText += "SG: " + player + " " + sgSelect.querySelector(`option[value="${player}"]`).getAttribute("data-price") + "\n";
+
+    });
+
+    selectedPlayersSF.forEach(function (player) {
+     selectedPlayersText += "SF: " + player + " " + sfSelect.querySelector(`option[value="${player}"]`).getAttribute("data-price") + "\n";
+    });
+
+    // Create a temporary textarea element to hold the text
+    var textarea = document.createElement("textarea");
+    textarea.value = selectedPlayersText;
+    document.body.appendChild(textarea);
+
+    // Select the text in the textarea and copy it to the clipboard
+    textarea.select();
+    document.execCommand("copy");
+
+    // Remove the temporary textarea
+    document.body.removeChild(textarea);
+
+    // Provide a visual indication that the text has been copied
+    alert("Selected players have been copied to the clipboard.");
+});
+
+
+    </script>
+</body>
+</html>
+
