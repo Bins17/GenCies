@@ -1,0 +1,322 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    height: 100vh; /* Set minimum height to cover the entire viewport */
+    margin: 0;
+    padding: 0;
+    /* background-image: url('homepagepic.png'); */
+    background-size: cover; /* Cover the entire background */
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: 'Roboto', sans-serif;
+    background-color: #ADD8E6; /* Light Blue Background Color */
+}
+
+.navbar {
+  margin-bottom: 80px;
+}
+
+.logo-navbar {
+  height: 45px; /* Adjust height as needed */
+  margin-right: 10px; /* Add margin to separate logo from text */
+}
+
+/* Added CSS for the description section */
+.description-section {
+    padding: 20px;
+    padding-bottom: 10px; /* Adjusted bottom padding to shorten the length */
+    background-color: #f8f9fa; /* Light gray background color */
+    border-bottom: 1px solid #dee2e6; /* Gray border bottom */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.description-text {
+    font-size: 18px;
+    color: #333; /* Dark text color */
+    text-align: center; /* Center align text */
+    width: 70%; /* Adjust the width of the text */
+    margin-left: 17%; /* Add margin to the right side of the text */
+     font-style: italic;
+}
+
+.description-image {
+    width: 30%; /* Adjust the width of the image */
+    height: auto; /* Maintain aspect ratio */
+    opacity: 0.7; /* Set opacity to 70% */
+}
+
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.button {
+    width: 340px;
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: #5adbb5;
+    color: #fff;
+    border: 3px solid black; /* Changed border color to black */
+    padding: 20px;
+    font-size: 26px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 10px; 
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease, border 0.5s ease;
+    margin: 18px;
+}
+
+.button:hover {
+    transform: translateY(6px);
+    border: 3px solid #ffbb00;
+    animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        border-color: #ffbb00;
+        box-shadow: 0 0 10px rgba(255, 187, 0, 0.7);
+    }
+    to {
+        border-color: #ffbb00;
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+    }
+}
+
+.button .button-image {
+    width: 100%;
+    height: 90%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+    animation: slowmo 4s infinite;
+}
+
+.button .button-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    text-shadow: -1px -1px 0 #000,  
+                  1px -1px 0 #000,
+                 -1px 1px 0 #000,
+                  1px 1px 0 #000; /* Added black outline to button text */
+}
+
+/* Updated CSS for extending the sidebar to the bottom */
+.sidebar {
+    position: fixed; /* Fixed position to keep it always visible */
+    top: 0;
+    left: 0;
+    height: 100vh; /* Height of the viewport */
+    width: 250px;
+    background-color: #343a40;
+    overflow-x: hidden;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column; /* Arrange children vertically */
+}
+
+.sidebar-content {
+    flex-grow: 1; /* Allow content to grow and fill remaining space */
+}
+
+/* Rest of your CSS styles */
+
+
+.sidebar-content {
+    flex-grow: 1; /* Allow content to grow and fill remaining space */
+}
+
+/* Rest of your CSS styles */
+
+
+.sidebar a {
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #fff;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    background-color: #5adbb5;
+    color: #fff;
+}
+
+/* Removed button appearance for exit link */
+.sidebar .exit-link {
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #fff;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar a img.icon {
+            width: 25px; /* Adjust icon size as needed */
+            height: 25px; /* Adjust icon size as needed */
+            margin-right: 10px; /* Add space between icon and text */
+        }
+
+   .nav-icon {
+    width: 25px; /* Adjust icon width as needed */
+    height: 25px; /* Adjust icon height as needed */
+    margin-right: 5px; /* Add spacing between icon and text */
+}
+
+.navbar-nav .nav-item {
+    margin-right: 25px; /* Adjust the margin-right to add space between nav items */
+}
+
+.popup-container {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        border: 2px solid #000;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        z-index: 9999;
+        display: none;
+    }
+
+        /* Pop-up content styles */
+        .popup-content {
+            /* Add your styles for the pop-up content here */
+        }
+
+.close-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.close-icon:hover {
+    color: red; /* Change color on hover if desired */
+}
+
+
+
+.popup-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.popup-buttons button {
+    width: 220px;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: #5adbb5;
+    color: #fff;
+    border: 3px solid black; /* Changed border color to black */
+    padding: 20px;
+    font-size: 26px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease, border 0.5s ease;
+    margin: 18px;
+}
+
+.popup-buttons button:hover {
+    transform: translateY(6px);
+    border: 3px solid #ffbb00;
+    animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        border-color: #ffbb00;
+        box-shadow: 0 0 10px rgba(255, 187, 0, 0.7);
+    }
+    to {
+        border-color: #ffbb00;
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+    }
+}
+
+.popup-buttons button .button-image {
+    width: 100%;
+    height: 90%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+    animation: slowmo 4s infinite;
+}
+
+.popup-buttons button .button-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    text-shadow: -1px -1px 0 #000,  
+                  1px -1px 0 #000,
+                 -1px 1px 0 #000,
+                  1px 1px 0 #000; /* Added black outline to button text */
+}
+
+.popup-buttons button img {
+    width: 200px; /* Adjust the width of the image */
+    height: 300px; /* Adjust the height of the image */
+    margin-bottom: 10px; /* Optional: Add margin to separate the image from the text */
+}
+
+.popup-container {
+        max-width: 600px; /* Set the maximum width */
+        width: 90%; /* Set the width as a percentage of its container */
+        margin: 0 auto; /* Center the pop-up container horizontally */
+        max-height: 80vh; /* Set the maximum height */
+        overflow-y: auto; /* Add vertical scrollbar when content exceeds height */
+    }
+
+  /* CSS for image wrapper */
+.image-wrapper {
+    width: 200px; /* Adjust the width as needed */
+    height: 200px; /* Adjust the height as needed */
+    border: 1px solid #ccc; /* Add border for frame */
+    overflow: hidden; /* Hide overflowing content */
+    margin: 10px auto; /* Adjust margin as needed */
+    display: flex; /* Use flexbox to center image */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+.image-wrapper img {
+    max-width: 100%; /* Make the image fit within the wrapper */
+    max-height: 100%; /* Make the image fit within the wrapper */
+    width: auto; /* Ensure image width adjusts proportionally */
+    height: auto; /* Ensure image height adjusts proportionally */
+}
+
+/* CSS for navbar image */
+.profile-image-navbar {
+    width: 35px; 
+    height: 20px; 
+    border-radius: 50%; 
+    margin-left: 10px; 
+}
